@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const student = require('./models/student');
 
 const app = express()
 
@@ -15,8 +16,29 @@ mongoose.connect('mongodb://localhost:27017/mydatabase', {
 app.get('/', (req,res)=>{
     res.send('Hello')
 })
+
 app.get('/test', (req,res)=>{
     res.send('Test Hello')
 })
+
+app.get('/add-student', (req,res)=> {
+    const student = new student({
+        name: 'shirel abargil',
+        exam1: 100,
+        exam2: 95,
+        exam3: 98
+
+    });
+
+    student.save()
+        .then((result) => {
+            res.send(result)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+})
+
 
 module.exports = app
