@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest --detectOpenHandles --forceExit", 
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "jest": {
     "testMatch": [
-      "jest --detectOpenHandles --forceExit"
+      "**/tests/**/*.test.js"
     ]
   },
+
   "author": "shirel",
   "license": "ISC",
   "dependencies": {
