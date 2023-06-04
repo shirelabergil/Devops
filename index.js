@@ -6,7 +6,7 @@ const Student = require('./models/student');
 const app = express();
 
 // Set the views directory
-app.set('views', 'C:/Users/Administrator/Documents/Devops/.vscode/views');
+app.set('views', '.vscode/views');
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
