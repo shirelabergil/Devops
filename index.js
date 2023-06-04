@@ -40,13 +40,12 @@ app.post('/add_student', async (req, res) => {
       exam3,
     });
     await student.save();
-    res.sendStatus(302).redirect('/add_student');
+    res.status(302).redirect('/');
   } catch (err) {
     console.error('Error saving student', err);
     res.status(400).send('Invalid student data');
   }
 });
-
 
 
 

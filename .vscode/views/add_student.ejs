@@ -1,21 +1,134 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>add_student Page</title>
+  <title>add-student Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+  
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-top: 30px;
+    }
+  
+    form {
+      width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 50px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  
+    label {
+      font-weight: bold;
+      
+    }
+  
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 20px;
+    }
+  
+    .error {
+      color: red;
+      margin-top: 5px;
+    }
+  
+    button[type="submit"] {
+      background-color: #4d2598;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #9155b6;
+    }
+  </style>
+  
 </head>
 <body>
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-  <h1>add_student Page</h1>
-  <form action="/add_student" method="POST">
+  <h1>Add Student Page</h1>
+  <form action="/add_student" method="POST" onsubmit="return validateForm()">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br><br>
+    <input type="text" id="name" name="name" required><br>
+    <span id="nameError" class="error"></span><br>
     <label for="exam1">Exam 1:</label>
-    <input type="number" id="exam1" name="exam1" required><br><br>
+    <input type="number" id="exam1" name="exam1" required><br>
+    <span id="exam1Error" class="error"></span><br>
     <label for="exam2">Exam 2:</label>
-    <input type="number" id="exam2" name="exam2" required><br><br>
+    <input type="number" id="exam2" name="exam2" required><br>
+    <span id="exam2Error" class="error"></span><br>
     <label for="exam3">Exam 3:</label>
-    <input type="number" id="exam3" name="exam3" required><br><br>
+    <input type="number" id="exam3" name="exam3" required><br>
+    <span id="exam3Error" class="error"></span><br>
     <button type="submit">Submit</button>
   </form>
+
+  <script>
+    function validateForm() {
+      const nameInput = document.getElementById('name');
+      const exam1Input = document.getElementById('exam1');
+      const exam2Input = document.getElementById('exam2');
+      const exam3Input = document.getElementById('exam3');
+
+      const nameError = document.getElementById('nameError');
+      const exam1Error = document.getElementById('exam1Error');
+      const exam2Error = document.getElementById('exam2Error');
+      const exam3Error = document.getElementById('exam3Error');
+
+      // Clear previous error messages
+      nameError.textContent = '';
+      exam1Error.textContent = '';
+      exam2Error.textContent = '';
+      exam3Error.textContent = '';
+
+      let isValid = true;
+
+      // Validate name field
+      if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Name is required';
+        isValid = false;
+      }
+
+      // Validate exam1 field
+      if (exam1Input.value.trim() === '') {
+        exam1Error.textContent = 'Exam 1 is required';
+        isValid = false;
+      }
+
+      // Validate exam2 field
+      if (exam2Input.value.trim() === '') {
+        exam2Error.textContent = 'Exam 2 is required';
+        isValid = false;
+      }
+
+      // Validate exam3 field
+      if (exam3Input.value.trim() === '') {
+        exam3Error.textContent = 'Exam 3 is required';
+        isValid = false;
+      }
+      
+
+      return isValid;
+    }
+  </script>
 </body>
 </html>
