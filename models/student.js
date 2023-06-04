@@ -8,5 +8,5 @@ const studentSchema = new schema({
     exam3 : Number
 }, {timestamps: true});
 
-const Student = mongoose.model('Student', studentSchema);
+const Student = mongoose.model('Students', studentSchema);
 module.exports =Student;
