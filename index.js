@@ -1,44 +1,47 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const student = require('./models/student');
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+const Student = require('./models/student');
 
-const app = express()
+const app = express();
 
-//connect to mongoDB
-const dbURI = 'mongodb+srv://ghanaab:1234567890@devops.4pnnlmu.mongodb.net/devops?retryWrites=true&w=majority' ;
-mongoose.connect( dbURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true, 
-  
-})
-    .then((result)=> app.listen( process.env.PORT || 3000) )
-    .catch((err)=> console.log(err) );
+// Set the views directory
+app.set('views', 'C:/Users/Administrator/Documents/Devops/.vscode/views');
 
-app.get('/', (req,res)=>{
-    res.send('Hello')
-})
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
 
-app.get('/test', (req,res)=>{
-    res.send('Test Hello')
-})
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-app.get('/add-student', (req, res) => {
-    const newStudent = new student({  // Use a different variable name here
-      name: 'shirel abargil',
-      exam1: 100,
-      exam2: 95,
-      exam3: 98
+// Connect to MongoDB
+const dbURI = 'mongodb+srv://ghanaab:1234567890@devops.4pnnlmu.mongodb.net/devops?retryWrites=true&w=majority';
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => app.listen(process.env.PORT || 3000))
+  .catch((err) => console.log(err));
+
+// Define routes
+app.get('/', (req, res) => {
+  res.render('register');
+});
+
+app.post('/register', async (req, res) => {
+  const { name, exam1, exam2, exam3 } = req.body;
+  try {
+    const student = new Student({
+      name,
+      exam1,
+      exam2,
+      exam3,
     });
-  
-    newStudent.save()
-      .then((result) => {
-        res.send(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-  
-
-
-module.exports = app
+    await student.save();
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error saving student', err);
+    res.redirect('/');
+  }
+});
