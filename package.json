@@ -10,7 +10,7 @@
   },
   "jest": {
     "testMatch": [
-      "**/tests/**/*.test.js"
+      "jest --detectOpenHandles --forceExit"
     ]
   },
   "author": "shirel",
