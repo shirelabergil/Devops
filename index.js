@@ -45,3 +45,5 @@ app.post('/register', async (req, res) => {
     res.redirect('/');
   }
 });
+
+module.exports = app;
